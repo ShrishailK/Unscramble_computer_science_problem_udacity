@@ -1,0 +1,51 @@
+Task 0 - O(1)
+This program is always going to take the same amount of time.
+'''
+print('first record of texts {} , texts, {} at time {}'.format(texts[0][0],texts[0][1],texts[0][2]))
+print('first record of texts {} , texts, {} at time {} , lasting {}'.format(calls[-1][0],calls[-1][1],calls[-1][2],calls[-1][3]))
+'''
+Task 1 - O(n)
+One loop is iterrating over the records object(calls+texts)
+'''
+print('There are {} different telephone numbers in the records'.format(len(set([phone for records in (calls+texts) for phone in records[:2]]))))
+'''
+
+Task 2 - O(n)
+One loop iterrating over calls object
+'''
+d = {}
+for call in calls:
+    for number in call[:2]:
+        d[number] = d.get(number,0) + int(call[3])
+longest_call = max(d.items(),key= operator.itemgetter(1))
+'''
+
+Task 3 - O(n)
+1 loop among calls -> O(n)
+1 loop among calls (worst case iterrate through all calls again) -> O(n)
+1 sorted function -> O(nlogn)
+1 counter function -> O(n)
+Total = O(n + n + nlogn + n) -> O(3n + nlogn) -> O(nlogn)
+'''
+banglore_calls = [call[1] for call in calls if call[0][:5]=='(080)']
+area_code = [number[:number.find(')')+1].replace('(','').replace(')','') if '(' in number else number [0:4] for number in banglore_calls]
+area_code_set = set(sorted(area_code))
+
+banglore_area_code = Counter(area_code)
+'''
+
+Task 4 - O(n)
+Getting texters -> O(n) 
+Getting call_receivers -> O(n) 
+Getting marketers -> O(n) 
+The sorted function at the end -> O(nlogn) O(n + n + n + nlogn) -> O(3n + nlogn) 
+-> O(nlogn) as final complexity
+
+'''
+texters = {phone for text in texts for phone in text[:2]}
+call_receivers = {call[1] for call in calls}
+marketers = {call[0] for call in calls if call[0] not in texters and call[0] not in call_receivers}
+
+print('These numbers could be telemarketers:')
+print('\n'.join(sorted(marketers)))
+'''
