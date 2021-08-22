@@ -82,10 +82,11 @@ for call in calls:
 longest_call = max(d.items(),key= operator.itemgetter(1))
 ```
 ## Task 3 - O(n)
-1 loop among calls -> O(n)
-1 loop among calls (worst case iterrate through all calls again) -> O(n)
-1 sorted function -> O(nlogn)
+1 loop among calls -> O(n) \
+1 loop among calls (worst case iterrate through all calls again) -> O(n)\
+1 sorted function -> O(nlogn)\
 1 counter function -> O(n)
+
 Total = O(n + n + nlogn + n) -> O(3n + nlogn) -> O(nlogn)
 ```
 banglore_calls = [call[1] for call in calls if call[0][:5]=='(080)']
@@ -95,12 +96,12 @@ area_code_set = set(sorted(area_code))
 banglore_area_code = Counter(area_code)
 ```
 ## Task 4 - O(n)
-Getting texters -> O(n) 
-Getting call_receivers -> O(n) 
-Getting marketers -> O(n) 
-The sorted function at the end -> O(nlogn) O(n + n + n + nlogn) -> O(3n + nlogn) 
--> O(nlogn) as final complexity
+1 loop Getting texters -> O(n) \
+1 loop Getting call_receivers -> O(n)\
+1 loop Getting marketers -> O(n)\
+1 sorted function at the end -> O(nlogn) 
 
+Total =  O(n + n + n + nlogn) -> O(3n + nlogn) -> O(nlogn) as final complexity
 ```
 texters = {phone for text in texts for phone in text[:2]}
 call_receivers = {call[1] for call in calls}
